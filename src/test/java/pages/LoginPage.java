@@ -3,8 +3,6 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.logging.Logger;
-
 public class LoginPage extends BasePage {
 
     private static final By SIGN_IN = By.className("login");
@@ -13,7 +11,7 @@ public class LoginPage extends BasePage {
     private static final By BUTTON_SIGN_IN = By.id("SubmitLogin");
     private static final By ICON_HOME_PAGE = By.className("icon-home");
     private static final By CONTACT_US = By.xpath("//a[contains(text(),'Contact us')]");
-    private static final String URL_HOME_PAGE = "http://automationpractice.com/index.php";
+    private static final String URL_HOME_PAGE = "http://automationpractice.com";
     private static final By MY_ACCOUNT = By.className("page-heading");
     private static final String URL_PAGE_MY_ACCOUNT = "http://automationpractice.com/index.php?controller=my-account";
 
@@ -22,15 +20,11 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void openHomePage() {
-        driver.get(URL_HOME_PAGE);
-    }
-
     public void pageMyAccount() {
         driver.get(URL_PAGE_MY_ACCOUNT);
     }
 
-    public void clickSignInPage() {
+    public void clickSignInElement() {
         driver.findElement(SIGN_IN).click();
     }
 
@@ -45,7 +39,10 @@ public class LoginPage extends BasePage {
         return driver.findElement(CONTACT_US).getText();
     }
 
-    public String seekStringMyAccount() {
+    public String getStringMyAccount() {
         return driver.findElement(MY_ACCOUNT).getText();
+    }
+    public void openHomePage() {
+        driver.get(URL_HOME_PAGE);
     }
 }

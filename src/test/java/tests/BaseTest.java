@@ -16,18 +16,22 @@ public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
     CartPage cartPage;
+    AuthenticationPage authenticationPage;
+    AccountFormPage accountFormPage;
 
     @BeforeTest
     public void setup(ITestContext context) {
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--start-maximized");
+        //chromeOptions.addArguments("--start-headless");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(chromeOptions);
-        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         context.setAttribute("driver", driver);
         loginPage = new LoginPage(driver);
         cartPage = new CartPage(driver);
-
+        accountFormPage = new AccountFormPage(driver);
+        authenticationPage = new AuthenticationPage(driver);
     }
 
     @AfterTest(alwaysRun = true)
