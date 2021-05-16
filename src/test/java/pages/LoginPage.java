@@ -22,28 +22,28 @@ public class LoginPage extends BasePage {
     }
 
     @Step ("Log in to My account page")
-    public void pageMyAccount() {
+    public void openMyAccountPage() {
         driver.get(URL_PAGE_MY_ACCOUNT);
     }
 
     @Step ("Log in to authentication page")
-    public void clickSignInElement() {
+    public void clickSignInButton() {
         driver.findElement(SIGN_IN).click();
     }
 
     @Step ("Log in to your personal account")
-    public void login(String email, String password) {
+    public void inputEmailAndPasswordAndClickSingIn(String email, String password) {
         driver.findElement(EMAIL).sendKeys(email);
         driver.findElement(PASSWORD).sendKeys(password);
         driver.findElement(BUTTON_SIGN_IN).click();
     }
     @Step ("Go to the home page and search for an element 'Contact us' to compare")
-    public String backHomePageAndFindElement() {
+    public String backHomePageAndFindContactUsElement() {
         driver.findElement(ICON_HOME_PAGE).click();
         return driver.findElement(CONTACT_US).getText();
     }
     @Step ("Search for an element 'MY ACCOUNT' for comparison")
-    public String getStringMyAccount() {
+    public String getMyAccountTitle() {
         return driver.findElement(MY_ACCOUNT).getText();
     }
 

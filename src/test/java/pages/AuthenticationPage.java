@@ -15,13 +15,13 @@ public class AuthenticationPage extends BasePage {
     }
 
     @Step ("Filling in the mail field and logging in to the Create Account page")
-    public void getEmailForAccount(String emailData) {
+    public void inputEmailForAccount(String emailData) {
         driver.findElement(EMAIL_FIELD).sendKeys(emailData);
         driver.findElement(BUTTON_CREATE_AN_ACCOUNT).click();
     }
 
     @Step ("Search for an element 'Create an account' for comparison" )
-    public String stringCreateAnAccount() {
+    public String findCreateAnAccountTitleOnPage() {
         return driver.findElement(STRING_CREATE_AN_ACCOUNT).getText();
     }
 

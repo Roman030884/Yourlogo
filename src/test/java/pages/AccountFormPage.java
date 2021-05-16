@@ -1,10 +1,11 @@
 package pages;
 
-import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+
+import static utils.TestUtil.randomEmail;
 
 
 public class AccountFormPage extends BasePage {
@@ -29,10 +30,10 @@ public class AccountFormPage extends BasePage {
         super(driver);
     }
 
-   @Step ("Filling out the registration form")
+    @Step("Filling out the registration form")
     public void fillOutRegistrationForm(String customerFirstName, String customerLastName, String password,
-                                    String address, String city, String zipCode, String mobilePhone,
-                                    String assignAddress) {
+                                        String address, String city, String zipCode, String mobilePhone,
+                                        String assignAddress) {
         driver.findElement(CUSTOMER_FIRST_NAME_FIELD).sendKeys(customerFirstName);
         driver.findElement(CUSTOMER_LAST_NAME_FIELD).sendKeys(customerLastName);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
@@ -43,40 +44,35 @@ public class AccountFormPage extends BasePage {
         driver.findElement(ASSIGN_ADDRESS_FIELD).sendKeys(assignAddress);
     }
 
-    public void getRegister() {
+    public void submitRegistrationForm() {
         driver.findElement(BUTTON_REGISTER).click();
     }
 
-    @Step ("Filling out the field State")
-    public void setState(String state) {
+    @Step("Filling out the field State")
+    public void chooseStateFromDropDown(String state) {
         driver.findElement(STATE).click();
         Select dropdown = new Select(driver.findElement(STATE));
-        dropdown.selectByVisibleText("Alabama");
+        dropdown.selectByVisibleText(state);
     }
-    @Step ("Generation random mail")
-    public void setEmailForAccount() {
+
+    @Step("Generation random mail and go to authentication page")
+    public void inputEmailAndGoToAuthenticationPage() {
         driver.findElement(EMAIL_FIELD).sendKeys(randomEmail(32));
         driver.findElement(BUTTON_CREATE).click();
     }
-    @Step ("Creating random mail")
-    public static String randomEmail(int length) {
-        Faker faker = new Faker();
-        return faker.internet().emailAddress();
-    }
 
-    @Step ("Search for an element to compare")
-    public String getContactUs() {
+    @Step("Search for an element (Contact us) to compare")
+    public String getContactUsButtonName() {
         return driver.findElement(CONTACT_US).getText();
     }
 
-    @Step ("Mandatory cleaning the field before filling out the field Assign address")
-    public void getCleanField (){
+    @Step("Mandatory cleaning the field before filling out the field Assign address")
+    public void cleanAddressField() {
         driver.findElement(ASSIGN_ADDRESS_FIELD).clear();
     }
 
-    @Step ("Log out of the subscriber's personal account")
+    @Step("Log out of the subscriber's personal account")
     public void logout() {
         driver.findElement(LOGOUT).click();
     }
-
 }

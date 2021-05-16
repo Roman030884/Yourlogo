@@ -24,14 +24,14 @@ public class CartPage extends BasePage {
     }
 
     @Step ("Adding an product to the shopping cart ")
-    public void addProductToCard() {
+    public void addProductToCart() {
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(IMG_PRODUCT)).build().perform();
         driver.findElement(BUTTON_ADD_TO_CART).click();
         driver.findElement(BUTTON_PROCEED_TO_CHECKOUT).click();
     }
     @Step ("Search for an element product to compare")
-    public String product() {
+    public String getProductName() {
         return driver.findElement(PRODUCT).getText();
     }
 
@@ -42,14 +42,14 @@ public class CartPage extends BasePage {
         driver.findElement(CHECKBOX_SHIPPING).click();
         driver.findElement(BUTTON_PROCEED_TO_CHECKOUT_PAGE_SHIPPING).click();
     }
-    @Step ("Payment method for the product is wire bank")
-    public void typeOfPaymentBankWire() {
+    @Step ("Payment method for the product is wire bank and confirm order")
+    public void chooseTypeOfPaymentBankWireAndConfirmOrder() {
         driver.findElement(BANK_WIRE).click();
         driver.findElement(BUTTON_I_CONFIRM_MY_ORDER).click();
     }
 
     @Step ("Search for an element (Order is complete) to compare")
-    public String orderIsComplete() {
+    public String getOrderIsCompleteOnPage() {
         return driver.findElement(ORDER_IS_COMPLETE).getText();
     }
 }
