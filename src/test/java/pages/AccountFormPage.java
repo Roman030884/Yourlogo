@@ -1,10 +1,11 @@
 package pages;
 
 import com.github.javafaker.Faker;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+
 
 public class AccountFormPage extends BasePage {
 
@@ -21,13 +22,15 @@ public class AccountFormPage extends BasePage {
     private static final By LOGOUT = By.className("logout");
     private static final By EMAIL_FIELD = By.id("email_create");
     private static final By CONTACT_US = By.xpath("//a[contains(text(),'Contact us')]");
+    private static final By BUTTON_CREATE = By.xpath("//*[@id='SubmitCreate']/span");
     private static final String PAIRWISE_CREATE_ACCOUNT_FORM = "https://pairwise.teremokgames.com/19bek/ ";
 
     public AccountFormPage(WebDriver driver) {
         super(driver);
     }
 
-    public void getRegistrationForm(String customerFirstName, String customerLastName, String password,
+   @Step ("Filling out the registration form")
+    public void fillOutRegistrationForm(String customerFirstName, String customerLastName, String password,
                                     String address, String city, String zipCode, String mobilePhone,
                                     String assignAddress) {
         driver.findElement(CUSTOMER_FIRST_NAME_FIELD).sendKeys(customerFirstName);
@@ -44,30 +47,36 @@ public class AccountFormPage extends BasePage {
         driver.findElement(BUTTON_REGISTER).click();
     }
 
-    public void getState(String state) {
+    @Step ("Filling out the field State")
+    public void setState(String state) {
         driver.findElement(STATE).click();
         Select dropdown = new Select(driver.findElement(STATE));
         dropdown.selectByVisibleText("Alabama");
     }
-
-    public void emailForAccount() {
+    @Step ("Generation random mail")
+    public void setEmailForAccount() {
         driver.findElement(EMAIL_FIELD).sendKeys(randomEmail(32));
-        driver.findElement(By.xpath("//*[@id='SubmitCreate']/span")).click();
+        driver.findElement(BUTTON_CREATE).click();
     }
-
-    public void setLogout() {
-        driver.findElement(LOGOUT).click();
-    }
-
+    @Step ("Creating random mail")
     public static String randomEmail(int length) {
         Faker faker = new Faker();
         return faker.internet().emailAddress();
     }
 
+    @Step ("Search for an element to compare")
     public String getContactUs() {
         return driver.findElement(CONTACT_US).getText();
     }
+
+    @Step ("Mandatory cleaning the field before filling out the field Assign address")
     public void getCleanField (){
         driver.findElement(ASSIGN_ADDRESS_FIELD).clear();
     }
+
+    @Step ("Log out of the subscriber's personal account")
+    public void logout() {
+        driver.findElement(LOGOUT).click();
+    }
+
 }

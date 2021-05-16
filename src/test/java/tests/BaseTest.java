@@ -1,6 +1,5 @@
 package tests;
 
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,10 +7,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import pages.*;
+import utils.TestListener;
 
 import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
+
 public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
@@ -23,7 +24,6 @@ public class BaseTest {
     public void setup(ITestContext context) {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
-        //chromeOptions.addArguments("--start-headless");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

@@ -2,14 +2,14 @@ package tests;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
+import utils.Retry;
 
 public class CartTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class, description = "Product add to cart with HomePage and " +
             "checks the availability of this product in cart")
-    public void CheckingAddProductToCartTest() {
+    public void checkingAddProductToCartTest() {
         loginPage.openHomePage();
         loginPage.clickSignInElement();
         loginPage.login("gost@tut.com", "789qwe456asd");
@@ -17,11 +17,11 @@ public class CartTest extends BaseTest {
         cartPage.addProductToCard();
         Assert.assertEquals(cartPage.product(), "Faded Short Sleeve T-shirts", "Product was not added in cart or " +
                 "was added another product");
-        accountFormPage.setLogout();
+        accountFormPage.logout();
     }
 
     @Test(retryAnalyzer = Retry.class, description = "Checking payment for the product byBank Wire")
-    public void CheckingPaymentForProductByBankWireTest() {
+    public void checkingPaymentForProductByBankWireTest() {
         loginPage.openHomePage();
         loginPage.clickSignInElement();
         loginPage.login("shier@gmail.com", "2R8bYmdQPz3J!!J");

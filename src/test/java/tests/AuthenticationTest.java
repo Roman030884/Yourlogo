@@ -2,10 +2,11 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.Retry;
 
 public class AuthenticationTest extends BaseTest{
 
-    @Test(dataProvider = "CreateAccountDataProvider",dataProviderClass = EmailData.class,retryAnalyzer = Retry.class,
+    @Test(dataProvider = "CreateAccountDataProvider", dataProviderClass = EmailData.class, retryAnalyzer = Retry.class,
             description ="Checking the login to the CREATE AN ACCOUNT page using different domains")
     public void checkingLoginCreateAnAccountPage(String emailData){
         loginPage.openHomePage();
