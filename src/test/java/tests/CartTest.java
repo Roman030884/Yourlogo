@@ -14,7 +14,7 @@ public class CartTest extends BaseTest {
         loginPage.openHomePage();
         loginPage.clickSignInButton();
         loginPage.inputEmailAndPasswordAndClickSingIn("gost@tut.com", "789qwe456asd");
-        driver.findElement(By.className("icon-home")).click();
+        cartPage.goToHomePage();
         cartPage.addProductToCart();
         Assert.assertEquals(cartPage.getProductName(), "Faded Short Sleeve T-shirts", "Product was not added in cart or " +
                 "was added another product");

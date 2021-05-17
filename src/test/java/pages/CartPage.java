@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 
 public class CartPage extends BasePage {
 
-    private static final By IMG_PRODUCT = By.xpath("//img[@alt='Faded Short Sleeve T-shirts']");
+    private static final By IMG_PRODUCT = By.xpath("//*[@id='homefeatured']/li[1]");
     private static final By BUTTON_ADD_TO_CART = By.xpath("//span[contains(text(),'Add to cart')]");
     private static final By BUTTON_PROCEED_TO_CHECKOUT = By.xpath("//span[contains(text(),'Proceed to checkout')]");
     private static final By PRODUCT = By.xpath("//*[text()='Faded Short Sleeve T-shirts']");
@@ -18,6 +18,7 @@ public class CartPage extends BasePage {
     private static final By BANK_WIRE = By.className("bankwire");
     private static final By BUTTON_I_CONFIRM_MY_ORDER = By.xpath("//span[text()='I confirm my order']");
     private static final By ORDER_IS_COMPLETE = By.xpath("//strong[@class='dark'][text()='Your order on My Store is complete.']");
+    private static final By ICON_GO_HOME_PAGE = By.className("icon-home");
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -51,5 +52,10 @@ public class CartPage extends BasePage {
     @Step ("Search for an element (Order is complete) to compare")
     public String getOrderIsCompleteOnPage() {
         return driver.findElement(ORDER_IS_COMPLETE).getText();
+    }
+
+    @Step ("Go to the home page")
+    public void goToHomePage (){
+      driver.findElement(ICON_GO_HOME_PAGE).click();
     }
 }
