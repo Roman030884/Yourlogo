@@ -1,9 +1,8 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import java.util.logging.Logger;
 
 public class LoginPage extends BasePage {
 
@@ -13,7 +12,7 @@ public class LoginPage extends BasePage {
     private static final By BUTTON_SIGN_IN = By.id("SubmitLogin");
     private static final By ICON_HOME_PAGE = By.className("icon-home");
     private static final By CONTACT_US = By.xpath("//a[contains(text(),'Contact us')]");
-    private static final String URL_HOME_PAGE = "http://automationpractice.com/index.php";
+    private static final String URL_HOME_PAGE = "http://automationpractice.com";
     private static final By MY_ACCOUNT = By.className("page-heading");
     private static final String URL_PAGE_MY_ACCOUNT = "http://automationpractice.com/index.php?controller=my-account";
 
@@ -22,30 +21,34 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void openHomePage() {
-        driver.get(URL_HOME_PAGE);
-    }
-
-    public void pageMyAccount() {
+    @Step ("Log in to My account page")
+    public void openMyAccountPage() {
         driver.get(URL_PAGE_MY_ACCOUNT);
     }
 
-    public void clickSignInPage() {
+    @Step ("Log in to authentication page")
+    public void clickSignInButton() {
         driver.findElement(SIGN_IN).click();
     }
 
-    public void login(String email, String password) {
+    @Step ("Log in to your personal account")
+    public void inputEmailAndPasswordAndClickSingIn(String email, String password) {
         driver.findElement(EMAIL).sendKeys(email);
         driver.findElement(PASSWORD).sendKeys(password);
         driver.findElement(BUTTON_SIGN_IN).click();
     }
-
-    public String backHomePageAndFindElement() {
+    @Step ("Go to the home page and search for an element 'Contact us' to compare")
+    public String backHomePageAndFindContactUsElement() {
         driver.findElement(ICON_HOME_PAGE).click();
         return driver.findElement(CONTACT_US).getText();
     }
-
-    public String seekStringMyAccount() {
+    @Step ("Search for an element 'MY ACCOUNT' for comparison")
+    public String getMyAccountTitle() {
         return driver.findElement(MY_ACCOUNT).getText();
+    }
+
+    @Step ("Log in to the home page")
+    public void openHomePage() {
+        driver.get(URL_HOME_PAGE);
     }
 }
