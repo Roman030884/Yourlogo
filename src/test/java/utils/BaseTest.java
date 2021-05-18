@@ -30,7 +30,7 @@ public class BaseTest {
         chromeOptions.addArguments("--start-maximized");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(chromeOptions);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         context.setAttribute("driver", driver);
         loginPage = new LoginPage(driver);
         cartPage = new CartPage(driver);
